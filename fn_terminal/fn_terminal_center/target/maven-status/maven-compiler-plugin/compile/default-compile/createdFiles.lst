@@ -1,0 +1,3 @@
+com\asiainfo\service\impl\TestOrderServiceImpl.class
+com\asiainfo\service\ITestOrderService.class
+com\asiainfo\controller\TestOrderController.class

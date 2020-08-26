@@ -1,0 +1,44 @@
+server:
+  context-path: /fn_terminal
+  port: 8081
+
+spring:
+  application:
+    name: fn_terminal
+  datasource:
+    # 使用阿里的Druid连接池
+    type: com.alibaba.druid.pool.DruidDataSource
+
+    #pg 开始
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://192.168.74.17:5432/fnterminal
+    username: fntm
+    password: fntm123456
+    #pg 结束
+
+    druid:
+      # 连接池的配置信息
+      # 初始化大小,最小,最大
+      initial-size: 5
+      min-idle: 5
+      maxActive: 20
+      # 配置获取连接等待超时的时间
+      maxWait: 60000
+      # 配置间隔多久才进行一次检测,检测需要关闭的空闲连接，单位是毫秒
+      timeBetweenEvictionRunsMillis: 60000
+      # 配置一个连接在池中最小生存的时间,单位是毫秒
+      minEvictableIdleTimeMillis: 300000
+      validationQuery: SELECT 1
+      testWhileIdle: true
+      testOnBorrow: false
+      testOnReturn: false
+      # 打开PSCache,并且指定每个连接上PSCache的大小
+      poolPreparedStatements: true
+      maxPoolPreparedStatementPerConnectionSize: 20
+      # 通过connectProperties属性来打开mergeSql功能;慢SQL记录
+      connectionProperties: druid.stat.mergeSql\=true;druid.stat.slowSqlMillis\=5000
+
+mybatis:
+  mapper-locations: classpath:mybatis/mapper/*.xml
+  configuration:
+    map-underscore-to-camel-case: false  #数据库下划线字段到POJO类驼峰形式的自动映射
